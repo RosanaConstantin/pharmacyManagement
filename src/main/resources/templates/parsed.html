@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>XML Viewer</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" th:src="@{js/functions.js}"></script>
+</head>
+<body>
+<th:block th:each="reteta : ${listaRetete}">
+    <div th:text="${reteta.dataEliberarii}"></div>
+</th:block>
+</body>
+</html>
