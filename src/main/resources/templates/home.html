@@ -1,10 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Pharmacy management</title>
+    <title>Managementul farmaciei</title>
+    <link rel="stylesheet" href="css/home.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" th:src="@{js/functions.js}"></script>
 </head>
 <body>
 
+    <div id="meniu">
+        <ul>
+            <li><a href="/parsed?filename=farmacie.xml">Retete</a></li>
+            <li><a onclick="uploadFile()">Incarca un fisier</a></li>
+            <li><a href="/view?filename=farmacie.xml">Vizualizare fisier</a></li>
+        </ul>
+    </div>
 </body>
 </html>

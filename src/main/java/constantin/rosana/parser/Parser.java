@@ -1,6 +1,5 @@
 package constantin.rosana.parser;
 
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import constantin.rosana.generated.Farmacie;
 import constantin.rosana.generated.ObjectFactory;
 import org.springframework.stereotype.Service;
@@ -13,7 +12,6 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.parsers.SAXParserFactory;
 import javax.xml.transform.sax.SAXSource;
-import java.io.File;
 import java.io.IOException;
 
 /**
@@ -21,22 +19,8 @@ import java.io.IOException;
  */
 @Service
 public class Parser {
-    /*public Farmacie parse(String filename){
-        XmlMapper xmlMapper = new XmlMapper();
-        Farmacie farmacie = new Farmacie();
-        try {
-            farmacie = xmlMapper.readValue(new File("C:\\Users\\ROSANA\\IdeaProjects\\pharmacymanagement\\src\\main\\resources\\files\\farmacie.xml"), Farmacie.class);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return farmacie;
-    }*/
-
     public Farmacie parse(String fileName) throws Exception {
-        //1. We need to create JAXContext instance
         JAXBContext jaxbContext = JAXBContext.newInstance(ObjectFactory.class);
-
-        //2. Use JAXBContext instance to create the Unmarshaller.
         Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
         System.setProperty("javax.xml.accessExternalDTD", "all");
 
@@ -52,7 +36,6 @@ public class Parser {
         });
         final SAXSource saxSource = new SAXSource(reader, new InputSource(ClassLoader.getSystemResourceAsStream("files/" + fileName)));
 
-        //3. Use the Unmarshaller to unmarshal the XML document to get an instance of JAXBElement.
         return (Farmacie) unmarshaller.unmarshal(saxSource);
     }
 }

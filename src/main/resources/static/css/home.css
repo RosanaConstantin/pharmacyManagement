@@ -1,0 +1,40 @@
+body{
+    background: url('../img/background.jpg');
+    background-repeat: no-repeat;
+    background-size: 100%
+}
+
+#meniu{
+    position: absolute;
+    top: 55%;
+    background-color: #f46869;
+    left: 50%;
+    width: 40%;
+    height: 50%;
+    border-radius: 10px;
+    transform: translate(-50%, -50%);
+}
+
+ul{
+   padding: 0px;
+   margin-top: 10%;
+   list-style-type: none;
+}
+
+li{
+    width: 80%;
+    margin-left: 10%;
+    margin-bottom: 20px;
+     margin-bottom: 30px;
+     border-radius: 10px;
+     text-align: center;
+     height: 50px;
+     font-style: oblique;
+     font-size: 20px;
+     background-color: #16bec0;
+ }
+
+ a{
+        text-decoration: none;
+        color: black;
+}

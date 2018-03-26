@@ -2,14 +2,85 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>XML Viewer</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>Retete</title>
+    <link rel="stylesheet" href="css/parsed.css">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" th:src="@{js/functions.js}"></script>
 </head>
 <body>
-<th:block th:each="reteta : ${listaRetete}">
-    <div th:text="${reteta.dataEliberarii}"></div>
+<th:block th:each="reteta, iter : ${listaRetete}">
+    <div class="reteta">
+        <div class="qrCode"></div>
+        <div class="detalii">
+            Seria:
+            <div class="serie" th:text="${reteta.serie}"></div>
+
+            Numar:
+            <div class="serie" th:text="${iter.index + 1}"></div>
+
+            </br>
+            Reteta
+            <div class="tip" th:text="${reteta.tip}"></div>
+        </div>
+
+        1. Unitatea medicala
+        </br>
+        <div class="info-pers"> Nume:
+            <div class="display" th:text="${reteta.medic.nume}"></div>
+        </div>
+
+        <div class="info-pers">Specializare:
+            <div class="text-format display" th:text="${#strings.toLowerCase(reteta.medic.specializare)}"></div>
+        </div>
+
+        <div class="line"></div>
+
+
+        </br>
+        2. Diagnostic:
+        <div class="display" th:text="${reteta.diagnostic.cod}"></div>
+
+        <div class="line"></div>
+
+        </br>
+        3. Pacient
+        </br>
+
+            <div class="info-pers"> Nume: <div class="display" th:text="${reteta.pacient.nume}"></div> </div>
+            <div class="info-pers">  CNP: <div class="display" th:text="${reteta.pacient.cnp}"></div> </div>
+            <div class="info-pers">  Sex: <div class="display" th:text="${reteta.pacient.sex}"></div> </div>
+            <div class="info-pers">  Varsta:  <div class="display" th:text="${reteta.pacient.varsta}"></div> </div>
+            <div class="info-pers">  Beneficiar: <div class="display text-format" th:text="${#strings.toLowerCase(reteta.pacient.tipBeneficiar)}"></div> </div>
+
+        <div class="line"></div>
+
+
+        </br>
+        4. Data eliberarii:
+        <div class="display" th:text="${reteta.dataEliberarii}"></div>
+        <div class="nrPrescriere">Numar zile prescriere:
+            <div class="display" th:text="${reteta.numarPrescriere}"></div>
+        </div>
+
+        <table style="width:calc(100% - 20px)">
+            <tr>
+                <th>Nr.crt.</th>
+                <th>Denumire</th>
+                <th>Cantitate</th>
+                <th>Compensare</th>
+                <th>Dozaj</th>
+            </tr>
+            <th:block th:each="medicament, iter : ${reteta.listaMedicamente.medicament}">
+                <tr>
+                    <td><div th:text="${iter.index + 1}"></div></td>
+                    <td><div class="denumire" th:text="${medicament.denumire}"></div></td>
+                    <td><div class="cantitate" th:text="${medicament.cantitate}"></div></td>
+                    <td><div class="compensare" th:text="${medicament.compensare}"></div></td>
+                    <td><div class="dozaj" th:text="${medicament.dozaj}"></div></td>
+                </tr>
+            </th:block>
+        </table>
+    </div>
 </th:block>
 </body>
 </html>
