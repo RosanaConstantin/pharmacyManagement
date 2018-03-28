@@ -22,13 +22,3 @@ function selectFile() {
 		jQuery("body").append(data);
 	});
 }
-
-function sendFileToParse(string){
-    jQuery.ajax({
-  		url: "http://localhost:8080/parsed?filename=" + string.innerHTML,
-  		method: "GET"
-  	}).done(function(data) {
-  		jQuery('body').empty();
-        jQuery('body').append(data);
-  	});
-}
