@@ -21,6 +21,8 @@ import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 import java.io.File;
 import java.io.StringWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Rosana-Constantin on 18-Mar-18.
@@ -28,9 +30,10 @@ import java.io.StringWriter;
 
 @Controller
 public class AppController {
-    //TODO: modal css
+    //TODO: modal css  - FACUT!!!!!
     //TODO: afisare lista fisiere din folder
-    //TODO: selectare fisier de vizualizat
+    //TODO: selectare fisier de vizualizat - FACUT!!!!
+    //TODO: afisare ca nu respecta dtd-ul. acum arunca null exceptie.
 
     @Autowired
     private Parser parser;
@@ -76,7 +79,13 @@ public class AppController {
         } catch (Throwable e) {
             e.printStackTrace();
         }
-        return "redirect:/home";
+        return "uploadFile";
+    }
+
+    @RequestMapping(value = "/selectForView", method = RequestMethod.GET)
+    public String getFiles(Model model) {
+        listFilesForFolder(model);
+        return "selectForView";
     }
 
     private HttpEntity<byte[]> getFile(String fileName) throws Exception{
@@ -100,5 +109,22 @@ public class AppController {
         header.setContentType(new MediaType("application", "xml"));
         header.setContentLength(documentBody.length);
         return new HttpEntity<byte[]>(documentBody, header);
+    }
+
+    private void listFilesForFolder(Model model) {
+        File folder = new File("src/main/resources/files/");
+        File[] files = folder.listFiles();
+        List<String> fileNames = new ArrayList<>();
+        for (int index = 0; index < files.length; index++) {
+            if (files[index].getName().contains(".xml")) {
+                fileNames.add(files[index].getName());
+            }
+        }
+        if (fileNames.isEmpty()) {
+            model.addAttribute("message", "There are no xml files.");
+        } else {
+            model.addAttribute("message", "The xml files are: ");
+        }
+        model.addAttribute("files", fileNames);
     }
 }

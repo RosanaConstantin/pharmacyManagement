@@ -1,0 +1,14 @@
+<div xmlns:th="http://www.w3.org/1999/xhtml">
+    <div id="modal_select">
+        <span onclick="destroy()" class="close">&times;</span>
+        <form action="/parsed" method="get" id="myForm">
+            <div class="files" th:if="${files != null}">
+                <th:block th:each="file : ${files}">
+
+                    <input class="file" type="radio" name="filename"  th:value="${file}">  <div th:text="${file}"></div><br>
+
+                </th:block>
+            </div>
+        </form>
+    </div>
+</div>

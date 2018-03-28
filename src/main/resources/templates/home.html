@@ -8,10 +8,17 @@
     <script type="text/javascript" th:src="@{js/functions.js}"></script>
 </head>
 <body>
-
+<div id="filesList"><a onclick="selectFile()">Fisiere</a></div>
     <div id="meniu">
         <ul>
-            <li><a href="/parsed?filename=farmacie.xml">Retete</a></li>
+            <li><a id="myButton">Retete</a></li>
+            <script type="text/javascript">
+                $(document).ready(function() {
+                   $("#myButton").click(function() {
+                       $("#myForm").submit();
+                   });
+                });
+            </script>
             <li><a onclick="uploadFile()">Incarca un fisier</a></li>
             <li><a href="/view?filename=farmacie.xml">Vizualizare fisier</a></li>
         </ul>
