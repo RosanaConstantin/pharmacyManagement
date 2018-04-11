@@ -11,6 +11,9 @@ function destroy() {
     jQuery("#modal").remove();
     jQuery("#modal_select").remove();
     jQuery("#modal-background").remove();
+    document.getElementById("parseButton").style.display = "none";
+    document.getElementById("viewButton").style.display = "none";
+    document.getElementById("uploadButton").style.marginTop = "150px";
 }
 
 
