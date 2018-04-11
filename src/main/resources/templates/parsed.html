@@ -8,6 +8,9 @@
     <script type="text/javascript" th:src="@{js/functions.js}"></script>
 </head>
 <body>
+<div id="homeButton">
+    <a href="/home">Acasa</a>
+</div>
 <th:block th:each="reteta, iter : ${listaRetete}">
     <div class="reteta">
         <div class="qrCode"></div>

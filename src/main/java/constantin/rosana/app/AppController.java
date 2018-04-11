@@ -30,11 +30,6 @@ import java.util.List;
 
 @Controller
 public class AppController {
-    //TODO: modal css  - FACUT!!!!!
-    //TODO: afisare lista fisiere din folder
-    //TODO: selectare fisier de vizualizat - FACUT!!!!
-    //TODO: afisare ca nu respecta dtd-ul. acum arunca null exceptie.
-
     @Autowired
     private Parser parser;
 

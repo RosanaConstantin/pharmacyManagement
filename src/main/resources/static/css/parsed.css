@@ -77,3 +77,20 @@ table, th, td {
     border: 1px solid black;
 }
 
+#homeButton{
+    width: 15%;
+    margin-left: 10%;
+    margin-bottom: 20px;
+     margin-bottom: 30px;
+     border-radius: 10px;
+     text-align: center;
+     height: 50px;
+     font-style: oblique;
+     font-size: 20px;
+     background-color: #16bec0;
+     padding-top: 20px;
+}
+ a{
+    text-decoration: none;
+    color: black;
+}

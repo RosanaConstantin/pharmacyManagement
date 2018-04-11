@@ -9,19 +9,31 @@
 </head>
 <body>
 <div id="filesList"><a onclick="selectFile()">Fisiere</a></div>
-    <div id="meniu">
-        <ul>
-            <li><a id="myButton">Retete</a></li>
-            <script type="text/javascript">
+<div id="meniu">
+    <ul>
+        <li style="display: none" id="parseButton"><a id="myButton">Retete</a></li>
+        <script type="text/javascript">
                 $(document).ready(function() {
                    $("#myButton").click(function() {
                        $("#myForm").submit();
                    });
                 });
-            </script>
-            <li><a onclick="uploadFile()">Incarca un fisier</a></li>
-            <li><a href="/view?filename=farmacie.xml">Vizualizare fisier</a></li>
-        </ul>
-    </div>
+
+        </script>
+        <li style="margin-top: 140px" id="uploadButton"><a onclick="uploadFile()">Incarca un fisier</a></li>
+        <li style="display: none" id="viewButton"><a id="view">Vizualizare fisier</a></li>
+        <script type="text/javascript">
+                $(document).ready(function() {
+                   $("#view").click(function() {
+                        var frm = document.getElementById('myForm');
+                        frm.action = "http://localhost:8080/view";
+                        console.log(frm.action);
+                        $("#myForm").submit();
+                   });
+                });
+
+        </script>
+    </ul>
+</div>
 </body>
 </html>

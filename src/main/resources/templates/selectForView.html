@@ -5,7 +5,7 @@
             <div class="files" th:if="${files != null}">
                 <th:block th:each="file : ${files}">
 
-                    <input class="file" type="radio" name="filename"  th:value="${file}">  <div th:text="${file}"></div><br>
+                    <input class="file" type="radio" name="filename" id="radioButton"  th:value="${file}">  <div th:text="${file}"></div><br>
 
                 </th:block>
             </div>
