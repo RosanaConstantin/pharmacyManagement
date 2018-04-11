@@ -1,0 +1,75 @@
+<?xml-stylesheet version="1.0" type="text/xsl" href="farmacie.xsl"?>
+<!DOCTYPE farmacie SYSTEM "farmacie.dtd">
+
+<farmacie>
+  <reteta tip="electronica" serie="100">
+    <diagnostic cod="841"/>
+    <numarPrescriere>45</numarPrescriere>
+    <dataEliberarii>12.12.2012</dataEliberarii>
+    <medic nume="Popescu Ion">
+      <specializare>Cardiologie</specializare>
+    </medic>
+    <pacient>
+      <nume>Gheorghe Vasile</nume>
+      <sex>M</sex>
+      <cnp>1780202510011</cnp>
+      <varsta>40</varsta>
+      <tipBeneficiar>salariat</tipBeneficiar>
+    </pacient>
+    <listaMedicamente>
+      <medicament>
+        <denumire>Ospen</denumire>
+        <cantitate>90</cantitate>
+        <compensare>50</compensare>
+        <dozaj>2 CPS/zi</dozaj>
+      </medicament>
+	   <medicament>
+        <denumire>Ospen</denumire>
+        <cantitate>90</cantitate>
+        <compensare>50</compensare>
+        <dozaj>2 CPS/zi</dozaj>
+      </medicament>
+	   <medicament>
+        <denumire>Ospen</denumire>
+        <cantitate>90</cantitate>
+        <compensare>50</compensare>
+        <dozaj>2 CPS/zi</dozaj>
+      </medicament>
+    </listaMedicamente>
+  </reteta>
+  <reteta tip="simpla" serie="109">
+    <diagnostic cod="193"/>
+    <numarPrescriere>90</numarPrescriere>
+    <dataEliberarii>30.02.2013</dataEliberarii>
+    <medic nume="Vlad Ilie">
+      <specializare>Diabetologie</specializare>
+    </medic>
+    <pacient>
+      <nume>Rosana Constantin</nume>
+      <sex>F</sex>
+      <cnp>2900202510011</cnp>
+      <varsta>28</varsta>
+      <tipBeneficiar>salariat</tipBeneficiar>
+    </pacient>
+    <listaMedicamente>
+	 <medicament>
+        <denumire>Ospen</denumire>
+        <cantitate>90</cantitate>
+        <compensare>50</compensare>
+        <dozaj>2 CPS/zi</dozaj>
+      </medicament>
+	   <medicament>
+        <denumire>Ospen</denumire>
+        <cantitate>90</cantitate>
+        <compensare>50</compensare>
+        <dozaj>2 CPS/zi</dozaj>
+      </medicament>
+      <medicament>
+        <denumire>Insulina</denumire>
+        <cantitate>90</cantitate>
+        <compensare>100</compensare>
+        <dozaj>1 INJ/zi</dozaj>
+      </medicament>
+    </listaMedicamente>
+  </reteta>
+</farmacie>

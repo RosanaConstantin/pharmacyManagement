@@ -1,0 +1,23 @@
+<!ELEMENT farmacie (reteta*)>
+<!ELEMENT reteta (diagnostic, numarPrescriere, dataEliberarii, medic, pacient, listaMedicamente)>
+	<!ATTLIST reteta tip CDATA #REQUIRED>
+	<!ATTLIST reteta serie CDATA #REQUIRED>
+<!ELEMENT diagnostic EMPTY>
+	<!ATTLIST diagnostic cod CDATA #REQUIRED>
+<!ELEMENT numarPrescriere (#PCDATA)>
+<!ELEMENT dataEliberarii (#PCDATA)>
+<!ELEMENT medic (specializare)>
+	<!ATTLIST medic nume CDATA #REQUIRED>
+<!ELEMENT specializare (#PCDATA)>
+<!ELEMENT pacient (nume, sex, cnp, varsta, tipBeneficiar)>
+<!ELEMENT nume (#PCDATA)>
+<!ELEMENT sex (#PCDATA)>
+<!ELEMENT cnp (#PCDATA)>
+<!ELEMENT varsta (#PCDATA)>
+<!ELEMENT tipBeneficiar (#PCDATA)>
+<!ELEMENT listaMedicamente (medicament+)>
+<!ELEMENT medicament (denumire, cantitate, compensare, dozaj)>
+<!ELEMENT denumire (#PCDATA)>
+<!ELEMENT cantitate (#PCDATA)>
+<!ELEMENT compensare (#PCDATA)>
+<!ELEMENT dozaj (#PCDATA)>

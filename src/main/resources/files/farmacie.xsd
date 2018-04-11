@@ -1,0 +1,120 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+	<xs:complexType name="farmacie">
+		<xs:sequence>
+			<xs:element name="reteta" type="reteta" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="reteta">
+		<xs:sequence>
+			<xs:element name="diagnostic" type="diagnostic" minOccurs="1"/>
+			<xs:element name="numarPrescriere" type="xs:positiveInteger" minOccurs="1"/>
+			<xs:element name="dataEliberarii" type="xs:string" minOccurs="1"/>
+			<xs:element name="medic" type="medic" minOccurs="1"/>
+			<xs:element name="pacient" type="pacient" minOccurs="1"/>
+			<xs:element name="listaMedicamente" type="listaMedicamente" minOccurs="1"/>
+		</xs:sequence>
+		<xs:attribute name="tip" type="tipReteta"/>
+		<xs:attribute name="serie" type="xs:positiveInteger"/>
+	</xs:complexType>
+	
+	<xs:complexType name="diagnostic">
+		<xs:attribute name="cod" type="xs:positiveInteger"/>
+	</xs:complexType>
+	
+	<xs:complexType name="medic">
+		<xs:sequence>
+			<xs:element name="specializare" type="specializare"/>
+		</xs:sequence>	
+		<xs:attribute name="nume" type="xs:string"/>
+	</xs:complexType>
+
+	<xs:complexType name="infoPersonale">
+		<xs:sequence>
+			<xs:element name="nume" type="xs:string" minOccurs="1"/>
+			<xs:element name="cnp" type="cnp" minOccurs="1"/>
+			<xs:element name="sex" type="sex"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="pacient">
+		<xs:complexContent>
+			<xs:extension base="infoPersonale">
+				<xs:sequence>
+					<xs:element name="varsta" type="xs:positiveInteger"/>
+					<xs:element name="tipBeneficiar" type="tipBeneficiar" minOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+
+	<xs:complexType name="listaMedicamente">
+		<xs:sequence>
+			<xs:element name="medicament" type="medicament" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="medicament">
+		<xs:sequence>
+			<xs:element name="denumire" type="xs:string"  minOccurs="1"/>
+			<xs:element name="cantitate" type="xs:positiveInteger"  minOccurs="1"/>
+			<xs:element name="compensare" type="compensare"  minOccurs="1"/>
+			<xs:element name="dozaj" type="xs:string" minOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:simpleType name="specializare">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Cardiologie" />
+			<xs:enumeration value="Diabetologie" />
+			<xs:enumeration value="Medic de familie"/>
+			<xs:enumeration value="Chirurgie"/>
+			<xs:enumeration value="Pediatrie"/>
+			<xs:enumeration value="Dermatologie"/>
+			<xs:enumeration value="Neurologie"/>
+			<xs:enumeration value="Ginecologie"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="tipReteta">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="electronica"/>
+			<xs:enumeration value="simpla" />
+			<xs:enumeration value="regimSpecial" />
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="sex">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="M"/>
+			<xs:enumeration value="F"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="cnp">
+		<xs:restriction base="xs:string">
+			<xs:length value="13"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="tipBeneficiar">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="salariat" />
+			<xs:enumeration value="student" />
+			<xs:enumeration value="pensionar"/>
+			<xs:enumeration value="neasigurat"/>
+			<xs:enumeration value="copil"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	 <xs:simpleType name="compensare">
+		<xs:restriction base="xs:integer">
+		  <xs:minInclusive value="0"/>
+		  <xs:maxInclusive value="100"/>
+		</xs:restriction>
+	 </xs:simpleType>
+	
+</xs:schema>
