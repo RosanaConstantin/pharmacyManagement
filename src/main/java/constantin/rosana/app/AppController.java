@@ -3,6 +3,7 @@ package constantin.rosana.app;
 import constantin.rosana.generated.Farmacie;
 import constantin.rosana.parser.Parser;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -47,7 +48,18 @@ public class AppController {
 
     @RequestMapping(value = "/view", method = RequestMethod.GET)
     public HttpEntity<byte[]> getXMLFile(@RequestParam(name = "filename") String fileName) throws Exception {
-        return getFile(fileName);
+        HttpEntity<byte[]> response = getFile(fileName);
+        if (response != null) {
+            return response;
+        } else {
+            StringWriter writer = new StringWriter();
+            IOUtils.copy(ClassLoader.getSystemResourceAsStream("templates/errorView.html"), writer, "UTF-8");
+            String file = writer.toString();
+            byte[] documentBody = file.getBytes();
+            HttpHeaders header = new HttpHeaders();
+            header.setContentLength(documentBody.length);
+            return new HttpEntity<byte[]>(documentBody, header);
+        }
     }
 
     @RequestMapping(value = "/farmacie.dtd", method = RequestMethod.GET)
@@ -77,15 +89,25 @@ public class AppController {
         return "uploadFile";
     }
 
+    @RequestMapping(value = "/error", method = RequestMethod.GET)
+    public String getError() {
+        return "error";
+    }
+
     @RequestMapping(value = "/selectForView", method = RequestMethod.GET)
     public String getFiles(Model model) {
         listFilesForFolder(model);
         return "selectForView";
     }
 
-    private HttpEntity<byte[]> getFile(String fileName) throws Exception{
+    private HttpEntity<byte[]> getFile(String fileName) throws Exception {
         if (fileName.contains(".xml")) {
-            Farmacie farmacie = this.parser.parse(fileName);
+            try {
+                Farmacie farmacie = this.parser.parse(fileName);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                return null;
+            }
         }
         String file = "";
         String path = "src/main/resources/files/" + fileName;
@@ -96,9 +118,12 @@ public class AppController {
             StreamResult result = new StreamResult(writer);
             TransformerFactory tFactory = TransformerFactory.newInstance();
             Transformer transformer = tFactory.newTransformer();
-            transformer.transform(source,result);
+            transformer.transform(source, result);
             file = writer.toString();
-        } catch (Exception e) {e.printStackTrace();}
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
         byte[] documentBody = file.getBytes();
         HttpHeaders header = new HttpHeaders();
         header.setContentType(new MediaType("application", "xml"));

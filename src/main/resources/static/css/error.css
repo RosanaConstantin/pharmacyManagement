@@ -1,0 +1,39 @@
+body{
+    background: url('../img/background.jpg');
+    background-repeat: no-repeat;
+    background-size: 100%
+}
+
+#homeButton{
+    width: 15%;
+    margin-left: 10%;
+    margin-bottom: 20px;
+     margin-bottom: 30px;
+     border-radius: 10px;
+     text-align: center;
+     height: 50px;
+     font-style: oblique;
+     font-size: 20px;
+     background-color: #16bec0;
+     padding-top: 20px;
+}
+ a{
+    text-decoration: none;
+    color: black;
+}
+
+#messageBox{
+    line-height: 1.5;
+    font-style: italic;
+    font-size: 30px;
+    background-color: #f5f3e6;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+    border-radius: 15px;
+    border: 10px solid #16bec0;
+    height: 41%;
+    margin-top: 12%;
+    font-family: sans-serif;
+}

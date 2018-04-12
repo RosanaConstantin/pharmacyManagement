@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
-
+	<xs:element name="farmacie" type="farmacie"/>
 	<xs:complexType name="farmacie">
 		<xs:sequence>
 			<xs:element name="reteta" type="reteta" minOccurs="0" maxOccurs="unbounded"/>
@@ -16,7 +16,7 @@
 			<xs:element name="pacient" type="pacient" minOccurs="1"/>
 			<xs:element name="listaMedicamente" type="listaMedicamente" minOccurs="1"/>
 		</xs:sequence>
-		<xs:attribute name="tip" type="tipReteta"/>
+		<xs:attribute name="tip" type="tipReteta" use="required"/>
 		<xs:attribute name="serie" type="xs:positiveInteger"/>
 	</xs:complexType>
 	

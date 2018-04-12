@@ -1,5 +1,6 @@
 package constantin.rosana.parser;
 
+
 import constantin.rosana.generated.Farmacie;
 import constantin.rosana.generated.ObjectFactory;
 import org.springframework.stereotype.Service;
@@ -8,10 +9,16 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
+import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.util.JAXBSource;
 import javax.xml.parsers.SAXParserFactory;
 import javax.xml.transform.sax.SAXSource;
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
+import javax.xml.validation.Validator;
+import java.io.File;
 import java.io.IOException;
 
 /**
@@ -23,6 +30,14 @@ public class Parser {
         JAXBContext jaxbContext = JAXBContext.newInstance(ObjectFactory.class);
         Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
         System.setProperty("javax.xml.accessExternalDTD", "all");
+
+        /**
+         * schema is created
+         */
+        SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+        Schema schema = sf.newSchema(new File("src/main/resources/files/farmacie.xsd"));
+        Validator validator = schema.newValidator();
+        validator.setErrorHandler(new XMLErrorHandler());
 
         final SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
         final XMLReader reader = saxParserFactory.newSAXParser().getXMLReader();
@@ -36,6 +51,9 @@ public class Parser {
         });
         final SAXSource saxSource = new SAXSource(reader, new InputSource(ClassLoader.getSystemResourceAsStream("files/" + fileName)));
 
-        return (Farmacie) unmarshaller.unmarshal(saxSource);
+        Farmacie farmacie = (Farmacie) unmarshaller.unmarshal(saxSource);
+        JAXBSource farmacieSource = new JAXBSource(jaxbContext, farmacie);
+        validator.validate(farmacieSource);
+        return farmacie;
     }
 }
