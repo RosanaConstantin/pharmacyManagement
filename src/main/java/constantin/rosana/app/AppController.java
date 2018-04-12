@@ -41,9 +41,14 @@ public class AppController {
 
     @RequestMapping(value = "/parsed", method = RequestMethod.GET)
     public String getParsedFile(@RequestParam(name = "filename") String fileName, Model model) throws Exception {
-        Farmacie farmacie = this.parser.parse(fileName);
-        model.addAttribute("listaRetete", farmacie.getReteta());
-        return "parsed";
+
+        try {
+            Farmacie farmacie = this.parser.parse(fileName);
+            model.addAttribute("listaRetete", farmacie.getReteta());
+            return "parsed";
+        } catch (Exception e) {
+            return "errorView";
+        }
     }
 
     @RequestMapping(value = "/view", method = RequestMethod.GET)
